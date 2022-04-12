@@ -6,6 +6,7 @@ import 'package:chai/models/LoginesponseModel.dart';
 import 'package:chai/models/registerResponseModel.dart';
 import 'package:chai/models/shopUser.dart';
 import 'package:chai/resources/prefResources.dart';
+import 'package:chai/resources/urlResources.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';

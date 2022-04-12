@@ -30,6 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController mobileController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   bool isSwitched = true;
+  bool isEdited = false;
   LoginResponsemodel login = LoginResponsemodel();
   bool switchControl = false;
   var textHolder = 'Inactive';
@@ -57,9 +58,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         jsonDecode(sharedPreferences.getString('userData')!);
     Users users = Users.fromJson(jsondetails);
     if (jsondetails.isNotEmpty) {
-      // nameController.value = TextEditingValue(text: users.name);
-      // mobileController.value = TextEditingValue(text: users.phone);
-      // addressController.value = TextEditingValue(text: users.address);
+      nameController.value = TextEditingValue(text: users.name);
+      mobileController.value = TextEditingValue(text: users.phone);
+      addressController.value = TextEditingValue(text: users.address);
       switchControl = users.swichControll;
       textHolder = users.textHolder;
     }
@@ -141,10 +142,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return Center(child: CircularProgressIndicator());
                   }
                   if (state is GetshopuserLoaded) {
-                    addressController.text = state.shopUser.address!;
-                    mobileController.text = state.shopUser.mobile!;
-                    nameController.text = state.shopUser.shopname!;
-                    status = state.shopUser.status!.toInt();
+                    if (isEdited == true) {
+                      addressController.text = addressController.text;
+                      mobileController.text = mobileController.text;
+                      nameController.text = nameController.text;
+                      status = status;
+                    } else {
+                      addressController.text = state.shopUser.address!;
+                      mobileController.text = state.shopUser.mobile!;
+                      nameController.text = state.shopUser.shopname!;
+                      status = state.shopUser.status!.toInt();
+                    }
 
                     return Column(
                       children: <Widget>[
@@ -362,18 +370,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
         status = 1;
         switchControl = true;
         textHolder = 'Active';
+        isEdited = true;
       });
       print('Active');
       // Put your code here which you want to execute on Switch ON event.
       print(status);
+      print(switchControl);
     } else {
       setState(() {
         switchControl = false;
         textHolder = 'Inactive';
         status = 0;
+        isEdited = true;
       });
       print('Inactive');
       print(status);
+      print(switchControl);
     }
   }
 
@@ -389,7 +401,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             style: TextStyle(color: Colors.black),
           ),
           content: new Text(
-            "Are you sure want to logout this account?",
+            "Are you sure want to logout from  this account?",
             style: TextStyle(color: Colors.red),
           ),
           actions: <Widget>[

@@ -1,4 +1,5 @@
 class UrlResources{
-    static String setDefaultAddress(phone) =>  "194.233.65.81/chai_admin/api/loginvendor?mobile=$phone";
+    // static String testUrl = "194.233.65.81";
+    static String host= "194.233.65.81";
 
 }

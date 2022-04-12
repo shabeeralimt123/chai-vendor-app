@@ -83,13 +83,13 @@ class _PendingScreenState extends State<PendingScreen> {
                           state.newOrders.purchaseorders!.purchase![index].id!;
                       return Padding(
                         padding: const EdgeInsets.only(
-                            left: 32, right: 32, bottom: 5, top: 5),
+                            left: 20, right: 20, bottom: 5, top: 5),
                         child: Material(
                           elevation: 8,
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
-                            width: 100,
-                            // width: MediaQuery.of(context).size.width,
+                            // width: 100,
+                            width: MediaQuery.of(context).size.width,
                             // height: 110,
                             decoration: BoxDecoration(
                                 border: Border.all(
