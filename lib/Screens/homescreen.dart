@@ -115,6 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
         },),
         child: Stack(
+          
           children: <Widget>[dashBg, content],
         ),
       ),
@@ -128,7 +129,16 @@ class _HomeScreenState extends State<HomeScreen> {
             flex: 2,
           ),
           Expanded(
-            child: Material(  borderRadius: BorderRadius.circular(10),elevation: 50,child: Container(height : 200,color: Colors.transparent)),
+            child: Material(  borderRadius: BorderRadius.circular(10),elevation: 50,child: Container(
+              decoration: BoxDecoration( boxShadow: [
+                BoxShadow(
+                  color: Colors.transparent,
+                  offset: Offset(0, 25),
+                  blurRadius: 3,
+                  spreadRadius: -10)
+              ],),
+              
+              height : 200,)),
             flex: 5,
           ),
           

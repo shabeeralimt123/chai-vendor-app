@@ -71,7 +71,7 @@ class _CashScreenState extends State<CashScreen> {
                            scrollDirection: Axis.vertical,
                            itemBuilder: (context, index) {
                         
-                             return ItemCard(amount:  state.newOrders.purchaseorders!.purchase![index].amount.toString(),colors: colors[index % colors.length] ,name:  state.newOrders.purchaseorders!.purchase![index].customername.toString(),date:  state.newOrders.purchaseorders!.purchase![index].date.toString(),time:  state.newOrders.purchaseorders!.purchase![index].time.toString(),title: state.newOrders.purchaseorders!.purchase![index].customername![0].toString() );
+                             return ItemCard(amount:  state.newOrders.purchaseorders!.purchase![index].amount.toString(),colors: colors[index % colors.length] ,name:  state.newOrders.purchaseorders!.purchase![index].customername!.toUpperCase().toString(),date:  state.newOrders.purchaseorders!.purchase![index].date.toString(),time:  state.newOrders.purchaseorders!.purchase![index].time.toString(),title: state.newOrders.purchaseorders!.purchase![index].customername![0].toUpperCase().toString() );
                            });
               }
               return Container();},
