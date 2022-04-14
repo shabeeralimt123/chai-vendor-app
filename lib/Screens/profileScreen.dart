@@ -34,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   LoginResponsemodel login = LoginResponsemodel();
   bool switchControl = false;
   var textHolder = 'Inactive';
-  int status = 1;
+  int? newstatus;
   late SharedPreferences sharedPreferences;
   ShopUser user = ShopUser();
 
@@ -69,8 +69,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    initialGetSavedData();
+
     BlocProvider.of<GetshopuserCubit>(context).getShopUser();
+    // initialGetSavedData();
   }
 
   @override
@@ -146,12 +147,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       addressController.text = addressController.text;
                       mobileController.text = mobileController.text;
                       nameController.text = nameController.text;
-                      status = status;
+                     
+                     
+                    
                     } else {
                       addressController.text = state.shopUser.address!;
                       mobileController.text = state.shopUser.mobile!;
                       nameController.text = state.shopUser.shopname!;
-                      status = state.shopUser.status!.toInt();
+                      if (state.shopUser.status == 1) {
+                        switchControl = true;
+                        textHolder = 'Active';
+                        newstatus= 1;
+                      } else {
+                        switchControl = false;
+                        textHolder = 'Inactive';
+                        newstatus=0;
+                      }
                     }
 
                     return Column(
@@ -296,7 +307,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Transform.scale(
                                   scale: 1.5,
                                   child: Switch(
-                                    onChanged: toggleSwitch,
+                                    onChanged: (value) {
+                                      toggleSwitch(value);
+                                    },
                                     value: switchControl,
                                     activeColor: Colors.black,
                                     activeTrackColor: Colors.grey,
@@ -312,10 +325,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             alignment: Alignment.bottomRight,
                             child: InkWell(
                                 onTap: () async {
-                                  storeData();
-
+                                  // storeData();
                                   print(
-                                      "status is...................... $status");
+                                      "the shop is active or inactive ......?   $textHolder");
+
+                                  log("status is...................... $newstatus");
 
                                   BlocProvider.of<AuthenticationCubit>(context)
                                       .register(
@@ -323,7 +337,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     nameController.text,
                                     mobileController.text,
                                     addressController.text,
-                                    status,
+                                    newstatus!,
                                   );
                                 },
                                 child: Container(
@@ -367,24 +381,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void toggleSwitch(bool value) {
     if (switchControl == false) {
       setState(() {
-        status = 1;
+        newstatus = 1;
         switchControl = true;
         textHolder = 'Active';
+
         isEdited = true;
       });
       print('Active');
       // Put your code here which you want to execute on Switch ON event.
-      print(status);
+      print(newstatus);
       print(switchControl);
     } else {
       setState(() {
         switchControl = false;
         textHolder = 'Inactive';
-        status = 0;
+        newstatus = 0;
+
         isEdited = true;
       });
       print('Inactive');
-      print(status);
+      print(newstatus);
       print(switchControl);
     }
   }
