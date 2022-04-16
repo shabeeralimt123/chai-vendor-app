@@ -79,7 +79,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          elevation: 0,
+          backgroundColor: Colors.white,
+           leading :IconButton(
+        icon:  Icon(Icons.arrow_back,color: Colors.black),
+        onPressed: () { Navigator.pop(context); },),
           actions: [
             IconButton(
                 onPressed: () {
@@ -87,12 +91,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
                 icon: Icon(
                   Icons.logout,
-                  color: Colors.white,
+                  color: Colors.black,
                 ))
           ],
           title: Text(
             "Profile Screen",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
           ),
         ),
         body: SingleChildScrollView(

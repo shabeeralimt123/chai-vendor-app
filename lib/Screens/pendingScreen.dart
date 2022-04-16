@@ -55,9 +55,12 @@ class _PendingScreenState extends State<PendingScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
+         leading :IconButton(
+        icon:  Icon(Icons.arrow_back,color: Colors.black),
+        onPressed: () { Navigator.pop(context); },),
       
-        title: Text("Pending", style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.black,
+        title: Text("Pending", style: TextStyle(color: Colors.black)),
+        backgroundColor: Colors.white,
       ),
       body: SmartRefresher(
         controller: _refreshController,
