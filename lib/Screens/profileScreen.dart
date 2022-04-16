@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isEdited = false;
   LoginResponsemodel login = LoginResponsemodel();
   bool switchControl = false;
-  var textHolder = 'Inactive';
+  var textHolder = 'INACTIVE';
   int? newstatus;
   late SharedPreferences sharedPreferences;
   ShopUser user = ShopUser();
@@ -119,21 +119,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             children: <Widget>[
               Container(height: 44, width: 44),
-              BlocBuilder<GetshopuserCubit, GetshopuserState>(
-                builder: (context, state) {
-                  if (state is GetshopuserLoaded) {
-                    return Stack(
-                      children: <Widget>[
-                        CircleAvatar(
-                          radius: 70,
-                          child: ClipRect(),
-                        ),
-                      ],
-                    );
-                  }
-                  return Container();
-                },
-              ),
+            
+                BlocBuilder<GetshopuserCubit,GetshopuserState>(
+                  builder: (context,state){
+                    if(state is GetshopuserLoaded){
+
+                    
+                    return  Material(
+                   elevation:22,
+                   borderRadius: BorderRadius.circular(99),
+                   child: Container(
+                     height:137,
+                     width:137,
+                    
+                     
+                     
+                     decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: 
+                          NetworkImage("http://194.233.65.81/chai_admin/${state.shopUser.logo}",scale: 1.0),fit: BoxFit.cover),
+                       
+                       
+                       borderRadius: BorderRadius.circular(99)),),
+                               );
+
+                   }return Container(); },
+                  
+                ),
+                 
               Padding(
                 padding: const EdgeInsets.only(
                     left: 22, right: 22, bottom: 100, top: 12),
@@ -147,9 +160,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       addressController.text = addressController.text;
                       mobileController.text = mobileController.text;
                       nameController.text = nameController.text;
-                     
-                     
-                    
                     } else {
                       addressController.text = state.shopUser.address!;
                       mobileController.text = state.shopUser.mobile!;
@@ -157,37 +167,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       if (state.shopUser.status == 1) {
                         switchControl = true;
                         textHolder = 'Active';
-                        newstatus= 1;
+                        newstatus = 1;
                       } else {
                         switchControl = false;
                         textHolder = 'Inactive';
-                        newstatus=0;
+                        newstatus = 0;
                       }
                     }
 
                     return Column(
                       children: <Widget>[
-                        Text("${state.shopUser.shopname}"),
+                        Text("${state.shopUser.shopname!.toUpperCase()}",style:TextStyle(fontWeight: FontWeight.bold)),
                         SizedBox(
                           height: 22,
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          child: Text("Name",
+                          child: Text("NAME",
                               style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.black,
+                                fontSize: 14,
+                                color: Colors.black,fontWeight: FontWeight.bold
                               )),
                         ),
                         Material(
-                          elevation: 3,
+                          elevation: 15,
                           borderRadius: BorderRadius.circular(7),
                           child: Container(
                             height: 48,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(7),
                                 border: Border.all(
-                                    color: Colors.black.withOpacity(.6))),
+                                    color: Colors.white.withOpacity(.6))),
                             child: Center(
                               child: TextFormField(
                                 // initialValue: state.shopUser.shopname!,
@@ -218,28 +228,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          child: Text("phone number",
+                          child: Text("PHONE NUMBER",
                               style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
+                                fontSize: 14,
+                                color: Colors.black,fontWeight: FontWeight.bold
                               )),
                         ),
                         SizedBox(
                           height: 5,
                         ),
                         Material(
-                          elevation: 3,
+                          elevation: 15,
                           borderRadius: BorderRadius.circular(7),
                           child: Container(
                             height: 45,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(7),
                                 border: Border.all(
-                                    color: Colors.black.withOpacity(.6))),
+                                    color: Colors.white.withOpacity(.6))),
                             child: Center(
                               child: TextFormField(
                                 // initialValue: state.shopUser.mobile!,
                                 controller: mobileController,
+                                keyboardType: TextInputType.number,
                                 cursorHeight: 16,
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
@@ -263,24 +274,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          child: Text("Address",
+                          child: Text("ADDRESS",
                               style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
+                                fontSize: 14,
+                                color: Colors.black,fontWeight: FontWeight.bold
                               )),
                         ),
                         SizedBox(
                           height: 5,
                         ),
                         Material(
-                          elevation: 3,
+                          elevation: 15,
                           borderRadius: BorderRadius.circular(7),
                           child: Container(
                             height: 45,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(7),
                                 border: Border.all(
-                                    color: Colors.black.withOpacity(.6))),
+                                    color: Colors.white.withOpacity(.6))),
                             child: Center(
                               child: TextFormField(
                                   // initialValue: state.shopUser.address!,
@@ -317,8 +328,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     inactiveTrackColor: Colors.grey,
                                   )),
                               Text(
-                                '$textHolder',
-                                style: TextStyle(fontSize: 18),
+                                '${textHolder.toUpperCase()}',
+                                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
                               )
                             ]),
                         Align(
@@ -340,26 +351,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     newstatus!,
                                   );
                                 },
-                                child: Container(
-                                  height: 50,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top:55),
                                   child: Material(
-                                    elevation: 10,
-                                    borderRadius: BorderRadius.circular(10),
+                                    elevation: 22,
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 60,
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Center(
-                                        child: Text(
-                                          "Update Profile",
-                                          style: TextStyle(
-                                              color: Color(0xffFFFFFF),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 13.0,
-                                              fontFamily: 'Metropolis'),
+                                      color: Colors.white,
+                                      height: 50,
+                                      child: Material(
+                                        elevation: 10,
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          height: 60,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Center(
+                                            child: Text(
+                                              "Update Profile",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 13.0,
+                                                  fontFamily: 'Metropolis'),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -383,7 +401,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       setState(() {
         newstatus = 1;
         switchControl = true;
-        textHolder = 'Active';
+        textHolder = 'ACTIVE';
 
         isEdited = true;
       });
@@ -394,7 +412,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     } else {
       setState(() {
         switchControl = false;
-        textHolder = 'Inactive';
+        textHolder = 'INACTIVE';
         newstatus = 0;
 
         isEdited = true;

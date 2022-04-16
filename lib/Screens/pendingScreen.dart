@@ -52,7 +52,7 @@ class _PendingScreenState extends State<PendingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
       
@@ -85,7 +85,7 @@ class _PendingScreenState extends State<PendingScreen> {
                         padding: const EdgeInsets.only(
                             left: 20, right: 20, bottom: 5, top: 5),
                         child: Material(
-                          elevation: 8,
+                          elevation: 22,
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
                             // width: 100,

@@ -11,8 +11,6 @@ import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const String constToken =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTk0LjIzMy42NS44MS9jaGFpX2FkbWluL2FwaS9sb2dpbnZlbmRvciIsImlhdCI6MTY0Nzk0NTAwMywibmJmIjoxNjQ3OTQ1MDAzLCJqdGkiOiJqak9NMFh3QzROR3BWYlhjIiwic3ViIjoyLCJwcnYiOiJhYTUxYmEwMjQwNWE5MzJjOTQ0NTNkYWY1MDBmZGI5YjhhOWM2ZDAwIn0.MV6Ye2cbX3B3ib6o-fbL_6FRdKDp8MVV_In2fcDSUjs";
 
 class AuthenticationRepository {
   Future<LoginResponsemodel> login(String phone) async {
