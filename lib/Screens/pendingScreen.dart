@@ -59,7 +59,7 @@ class _PendingScreenState extends State<PendingScreen> {
         icon:  Icon(Icons.arrow_back,color: Colors.black),
         onPressed: () { Navigator.pop(context); },),
       
-        title: Text("Pending", style: TextStyle(color: Colors.black)),
+        title: Text("Pendingss", style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
       ),
       body: SmartRefresher(
